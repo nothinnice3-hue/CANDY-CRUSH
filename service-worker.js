@@ -1,6 +1,6 @@
 // Candy Crunch service worker
 // VERSION is auto-bumped by deploy.ps1 — do not edit by hand
-const VERSION = '2026-05-20-131438';
+const VERSION = '2026-05-20-132626';
 const CACHE_NAME = `candy-crunch-${VERSION}`;
 
 const STATIC_ASSETS = [

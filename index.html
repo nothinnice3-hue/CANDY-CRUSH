@@ -418,6 +418,121 @@
     opacity: .8; font-size: 12px; text-align: center; margin-top: 4px;
     max-width: 540px;
   }
+
+  /* === Screen / menu system === */
+  .screen { display: none; flex-direction: column; align-items: center; min-height: 100vh; padding: 16px; box-sizing: border-box; animation: screen-in .35s ease-out; position: relative; }
+  .screen.active { display: flex; }
+  @keyframes screen-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .screen.home { justify-content: center; text-align: center; }
+  .title-big {
+    font-size: 64px; font-weight: 900; letter-spacing: 3px;
+    margin: 0 0 4px; line-height: 0.95;
+    background: linear-gradient(180deg, #fff, #ffd1ec, #ff9bd2);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 4px 0 #6a0dad) drop-shadow(0 8px 22px rgba(0,0,0,.4));
+    animation: title-bob 3s ease-in-out infinite;
+  }
+  @keyframes title-bob { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-6px) rotate(1deg); } }
+  .subtitle { font-size: 13px; letter-spacing: 5px; opacity: 0.85; margin: 0 0 28px; text-transform: uppercase; }
+  .home-stats { display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap; justify-content: center; }
+  .hs { background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.3); border-radius: 14px; padding: 8px 14px; min-width: 80px; backdrop-filter: blur(6px); }
+  .hs-label { font-size: 10px; opacity: 0.85; letter-spacing: 1.5px; text-transform: uppercase; }
+  .hs-val { font-size: 22px; font-weight: 800; }
+  .menu-buttons { display: flex; flex-direction: column; gap: 12px; width: 280px; max-width: 90vw; }
+  .menu-buttons .btn { width: 100%; }
+  .btn-big { font-size: 22px !important; padding: 16px 28px !important; box-shadow: 0 6px 0 #6a0dad, 0 10px 25px rgba(0,0,0,.4) !important; animation: btn-pulse 1.8s ease-in-out infinite; }
+  @keyframes btn-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+  .btn-small { font-size: 11px !important; padding: 8px 16px !important; }
+  .back-btn {
+    position: absolute; top: 14px; left: 14px;
+    width: 44px; height: 44px;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    font-size: 22px; color: #fff;
+    cursor: pointer; font-family: inherit;
+    display: grid; place-items: center;
+    transition: transform .12s ease, background .15s ease;
+  }
+  .back-btn:hover { background: rgba(255,255,255,0.28); }
+  .back-btn:active { transform: scale(0.92); }
+  .screen-title { font-size: 30px; margin: 0 0 22px; text-shadow: 0 2px 0 #6a0dad, 0 4px 12px rgba(0,0,0,.4); }
+  .level-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, 86px);
+    gap: 12px; justify-content: center; max-width: 500px; padding-bottom: 30px;
+  }
+  .level-tile {
+    width: 86px; height: 86px;
+    background: linear-gradient(160deg, #ff7ac6, #c81fb1);
+    border: 2px solid #fff; border-radius: 16px;
+    cursor: pointer; font-family: inherit; color: #fff;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    box-shadow: 0 4px 0 #6a0dad, 0 6px 18px rgba(0,0,0,.3);
+    transition: transform .15s ease;
+  }
+  .level-tile:active { transform: translateY(2px); box-shadow: 0 2px 0 #6a0dad, 0 4px 10px rgba(0,0,0,.3); }
+  .level-tile.locked { background: linear-gradient(160deg, #5a4a7a, #3a2a5a); box-shadow: 0 2px 0 #2a1a4a, 0 4px 10px rgba(0,0,0,.4); opacity: 0.65; cursor: not-allowed; }
+  .level-tile.locked:active { transform: none; }
+  .level-tile.jelly { background: linear-gradient(160deg, #6abfff, #1a5ec8); box-shadow: 0 4px 0 #0a3b80, 0 6px 18px rgba(0,0,0,.3); }
+  .level-tile.current { animation: tile-glow 1.5s ease-in-out infinite; }
+  @keyframes tile-glow {
+    0%,100% { box-shadow: 0 4px 0 #6a0dad, 0 6px 18px rgba(0,0,0,.3), 0 0 0px #fff; }
+    50%     { box-shadow: 0 4px 0 #6a0dad, 0 6px 18px rgba(0,0,0,.3), 0 0 22px #fff; }
+  }
+  .level-num { font-size: 26px; font-weight: 900; line-height: 1; text-shadow: 0 2px 0 rgba(0,0,0,.4); }
+  .level-type-label { font-size: 8px; letter-spacing: 1px; text-transform: uppercase; opacity: 0.85; margin-top: 2px; }
+  .level-stars { font-size: 11px; margin-top: 4px; letter-spacing: 1px; color: #ffe066; text-shadow: 0 0 6px #ffe066; height: 14px; }
+  .level-tile.locked .level-stars { color: rgba(255,255,255,0.4); text-shadow: none; }
+  .settings-list { width: 100%; max-width: 360px; display: flex; flex-direction: column; gap: 14px; }
+  .setting-row {
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 14px; padding: 14px 18px;
+  }
+  .setting-row span { font-size: 16px; font-weight: 600; }
+  .toggle {
+    background: linear-gradient(180deg, #6affb9, #2db884);
+    color: #fff; border: none; font-weight: 800; letter-spacing: 1.5px;
+    padding: 8px 18px; border-radius: 999px; cursor: pointer;
+    font-family: inherit; box-shadow: 0 3px 0 #1a5a40;
+    transition: transform .12s ease;
+  }
+  .toggle:active { transform: translateY(2px); box-shadow: 0 1px 0 #1a5a40; }
+  .toggle.off { background: linear-gradient(180deg, #888, #555); box-shadow: 0 3px 0 #333; }
+  .btn-danger {
+    background: linear-gradient(180deg, #ff7e3a, #d83a1c) !important;
+    box-shadow: 0 4px 0 #7a1a0a, 0 8px 18px rgba(0,0,0,.3) !important;
+    margin-top: 8px;
+  }
+  .btn-secondary {
+    background: linear-gradient(180deg, #888, #555) !important;
+    box-shadow: 0 4px 0 #333, 0 8px 18px rgba(0,0,0,.3) !important;
+  }
+  .howto-content { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 420px; padding-bottom: 30px; }
+  .howto-item {
+    display: flex; gap: 14px; align-items: center;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 14px; padding: 12px 16px;
+  }
+  .howto-item .icon { font-size: 28px; flex-shrink: 0; width: 38px; text-align: center; }
+  .howto-item p { margin: 0; font-size: 13px; line-height: 1.4; }
+  .pause-btn {
+    position: fixed; top: 14px; right: 14px;
+    width: 44px; height: 44px;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    color: #fff; font-size: 18px;
+    cursor: pointer; font-family: inherit;
+    display: grid; place-items: center;
+    z-index: 20;
+    transition: transform .12s ease;
+  }
+  .pause-btn:active { transform: scale(0.92); }
+  .overlay .modal button + button { margin-top: 10px; }
+
   @media (max-width: 540px) {
     :root { --cell: 38px; }
     .candy { font-size: 22px; }
@@ -427,6 +542,61 @@
 </style>
 </head>
 <body>
+  <div id="screenWrap">
+
+    <!-- HOME SCREEN -->
+    <div class="screen home active" data-screen="home">
+      <h1 class="title-big">Candy<br>Crunch</h1>
+      <div class="subtitle">Match · Crunch · Crush</div>
+      <div class="home-stats">
+        <div class="hs"><div class="hs-label">Best</div><div class="hs-val" id="statBestScore">0</div></div>
+        <div class="hs"><div class="hs-label">★ Stars</div><div class="hs-val" id="statTotalStars">0</div></div>
+        <div class="hs"><div class="hs-label">Level</div><div class="hs-val" id="statLevel">1</div></div>
+      </div>
+      <div class="menu-buttons">
+        <button class="btn btn-big" id="btnPlay">▶ PLAY</button>
+        <button class="btn" id="btnLevels">LEVELS</button>
+        <button class="btn" id="btnSettings">SETTINGS</button>
+        <button class="btn btn-small" id="btnHowTo">HOW TO PLAY</button>
+      </div>
+    </div>
+
+    <!-- LEVEL SELECT -->
+    <div class="screen levels" data-screen="levels">
+      <button class="back-btn" data-back="home">←</button>
+      <h2 class="screen-title">Select Level</h2>
+      <div class="level-grid" id="levelGrid"></div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="screen settings" data-screen="settings">
+      <button class="back-btn" data-back="home">←</button>
+      <h2 class="screen-title">Settings</h2>
+      <div class="settings-list">
+        <div class="setting-row"><span>Sound effects</span><button class="toggle" id="toggleSound">ON</button></div>
+        <div class="setting-row"><span>Background music</span><button class="toggle off" id="toggleMusic">OFF</button></div>
+        <button class="btn btn-danger" id="btnResetProgress">RESET PROGRESS</button>
+      </div>
+    </div>
+
+    <!-- HOW TO PLAY -->
+    <div class="screen howto" data-screen="howto">
+      <button class="back-btn" data-back="home">←</button>
+      <h2 class="screen-title">How to Play</h2>
+      <div class="howto-content">
+        <div class="howto-item"><div class="icon">🍬</div><p>Drag a candy in any direction to swap with a neighbor. Match 3+ of the same color to clear them.</p></div>
+        <div class="howto-item"><div class="icon">📏</div><p><b>Match 4</b> in a row → <b>striped candy</b>. Clears a whole row or column!</p></div>
+        <div class="howto-item"><div class="icon">📦</div><p><b>L or T shape</b> match → <b>wrapped candy</b>. Explodes 3×3 — twice!</p></div>
+        <div class="howto-item"><div class="icon">✨</div><p><b>Match 5</b> in a row → <b>color bomb</b>. Swap with any candy to clear every candy of that color.</p></div>
+        <div class="howto-item"><div class="icon">💥</div><p>Swap two specials for huge combos. Bomb + bomb clears the whole board!</p></div>
+        <div class="howto-item"><div class="icon">🟦</div><p>On jelly levels, clear every blue jelly square before running out of moves.</p></div>
+        <div class="howto-item"><div class="icon">⏱</div><p>Sit idle for 5 seconds and a hint will pulse to show you a valid swap.</p></div>
+      </div>
+    </div>
+
+    <!-- GAME SCREEN -->
+    <div class="screen game" data-screen="game">
+      <button class="pause-btn" id="btnPause">⏸</button>
   <div class="app">
     <h1>Candy Crunch</h1>
 
@@ -459,10 +629,12 @@
     </div>
 
     <div class="footer">
-      Drag a candy to swap. Match 4 → striped • L/T match → wrapped (explodes twice) • Match 5 → color bomb.
-      Swap two specials for combos. Sit still for a hint.
+      Drag a candy to swap. Match 4 → striped • L/T → wrapped • Match 5 → color bomb.
     </div>
   </div>
+    </div> <!-- end .screen.game -->
+
+  </div> <!-- end #screenWrap -->
 
   <div class="overlay" id="overlay">
     <div class="modal">
@@ -474,6 +646,17 @@
       </div>
       <p id="overlayText">You reached the goal.</p>
       <button class="btn" id="overlayBtn">Next Level</button>
+      <button class="btn btn-secondary" id="overlayQuitBtn">MENU</button>
+    </div>
+  </div>
+
+  <div class="overlay" id="pauseOverlay">
+    <div class="modal">
+      <h2>Paused</h2>
+      <p>Take a breath. Pick up where you left off.</p>
+      <button class="btn" id="btnResume">▶ RESUME</button>
+      <button class="btn btn-secondary" id="btnPauseRestart">RESTART LEVEL</button>
+      <button class="btn btn-secondary" id="btnPauseQuit">QUIT TO MENU</button>
     </div>
   </div>
 
@@ -595,9 +778,18 @@
   let hintTimer = null;
   let hintCells = null;
 
+  // persistent progress (loaded from localStorage)
+  let progress = {
+    unlockedLevel: 1,
+    bestScores: {},
+    bestStars: {},
+    settings: { sound: true, music: false }
+  };
+
   // ---- Audio ----
   let audioCtx;
   function beep(freq=440, dur=0.08, type='triangle', vol=0.06) {
+    if (progress && progress.settings && progress.settings.sound === false) return;
     try {
       audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
       const o = audioCtx.createOscillator();
@@ -1495,6 +1687,14 @@
 
   function endGame(won) {
     clearHint();
+    if (won) {
+      const ratio = score / Math.max(1, scoreGoal);
+      const stars = ratio >= 1.5 ? 3 : ratio >= 1.15 ? 2 : 1;
+      progress.bestStars[level] = Math.max(progress.bestStars[level] || 0, stars);
+      progress.bestScores[level] = Math.max(progress.bestScores[level] || 0, score);
+      progress.unlockedLevel = Math.max(progress.unlockedLevel, level + 1);
+      saveProgress();
+    }
     overlayTitle.textContent = won ? `Level ${level} Complete!` : 'Out of Moves';
     let txt;
     if (won) {
@@ -1551,7 +1751,189 @@
     repositionAll();
   });
 
-  document.getElementById('newGameBtn').addEventListener('click', () => newGame('restart'));
+  // === Progress storage ===
+  const STORAGE_KEY = 'candy-crunch-progress-v1';
+  function loadProgress() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const p = JSON.parse(raw);
+        progress = {
+          unlockedLevel: p.unlockedLevel || 1,
+          bestScores: p.bestScores || {},
+          bestStars:  p.bestStars  || {},
+          settings:   { ...progress.settings, ...(p.settings || {}) }
+        };
+      }
+    } catch {}
+  }
+  function saveProgress() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(progress)); } catch {}
+  }
+
+  // === Screen management ===
+  function showScreen(name) {
+    document.querySelectorAll('.screen').forEach(el => {
+      el.classList.toggle('active', el.dataset.screen === name);
+    });
+    if (name === 'home')     updateHomeStats();
+    else if (name === 'levels')   renderLevelGrid();
+    else if (name === 'settings') updateSettingsUI();
+    if (name !== 'game') clearHint();
+  }
+  function updateHomeStats() {
+    const totalStars = Object.values(progress.bestStars).reduce((a,b) => a+b, 0);
+    const scores = Object.values(progress.bestScores);
+    const bestScore = scores.length ? Math.max(...scores) : 0;
+    document.getElementById('statBestScore').textContent = bestScore.toLocaleString();
+    document.getElementById('statTotalStars').textContent = totalStars;
+    document.getElementById('statLevel').textContent = progress.unlockedLevel;
+    document.getElementById('btnPlay').textContent = progress.unlockedLevel > 1 ? '▶ CONTINUE' : '▶ PLAY';
+  }
+  function renderLevelGrid() {
+    const grid = document.getElementById('levelGrid');
+    grid.innerHTML = '';
+    const show = Math.max(progress.unlockedLevel + 3, 16);
+    for (let lv = 1; lv <= show; lv++) {
+      const cfg = getLevelConfig(lv);
+      const locked = lv > progress.unlockedLevel;
+      const stars = progress.bestStars[lv] || 0;
+      const tile = document.createElement('button');
+      tile.className = 'level-tile';
+      if (locked) tile.classList.add('locked');
+      if (cfg.type === 'jelly') tile.classList.add('jelly');
+      if (lv === progress.unlockedLevel) tile.classList.add('current');
+      tile.innerHTML = `
+        <div class="level-num">${locked ? '🔒' : lv}</div>
+        <div class="level-type-label">${cfg.type === 'jelly' ? 'Jelly' : 'Score'}</div>
+        <div class="level-stars">${stars > 0 ? '★'.repeat(stars) + '☆'.repeat(3-stars) : '☆☆☆'}</div>`;
+      if (!locked) {
+        tile.addEventListener('click', () => {
+          level = lv;
+          newGame('retry');
+          showScreen('game');
+        });
+      }
+      grid.appendChild(tile);
+    }
+  }
+  function updateSettingsUI() {
+    const ts = document.getElementById('toggleSound');
+    const tm = document.getElementById('toggleMusic');
+    ts.textContent = progress.settings.sound ? 'ON' : 'OFF';
+    ts.classList.toggle('off', !progress.settings.sound);
+    tm.textContent = progress.settings.music ? 'ON' : 'OFF';
+    tm.classList.toggle('off', !progress.settings.music);
+  }
+
+  // === Pause ===
+  const pauseOverlayEl = document.getElementById('pauseOverlay');
+  let wasPaused = false;
+  function pauseGame() {
+    if (busy) return;
+    wasPaused = true;
+    pauseOverlayEl.classList.add('show');
+    clearHint();
+    stopMusic();
+  }
+  function resumePause() {
+    wasPaused = false;
+    pauseOverlayEl.classList.remove('show');
+    if (progress.settings.music) startMusic();
+    scheduleHint();
+  }
+
+  // === Background music (simple synth pad) ===
+  let musicNodes = null;
+  function startMusic() {
+    if (musicNodes) return;
+    if (!progress.settings.music) return;
+    try {
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      const chords = [
+        [261.63, 329.63, 392.00],
+        [220.00, 277.18, 329.63],
+        [174.61, 220.00, 261.63],
+        [196.00, 246.94, 293.66],
+      ];
+      const master = audioCtx.createGain();
+      master.gain.value = 0.018;
+      master.connect(audioCtx.destination);
+      const oscs = [];
+      for (let i = 0; i < 3; i++) {
+        const o = audioCtx.createOscillator();
+        o.type = 'sine';
+        o.frequency.value = chords[0][i];
+        o.connect(master);
+        o.start();
+        oscs.push(o);
+      }
+      let idx = 0;
+      const interval = setInterval(() => {
+        if (!musicNodes) return;
+        idx = (idx + 1) % chords.length;
+        const t = audioCtx.currentTime;
+        for (let i = 0; i < 3; i++) {
+          oscs[i].frequency.exponentialRampToValueAtTime(chords[idx][i], t + 1.5);
+        }
+      }, 3800);
+      musicNodes = { oscs, master, interval };
+    } catch {}
+  }
+  function stopMusic() {
+    if (!musicNodes) return;
+    clearInterval(musicNodes.interval);
+    musicNodes.oscs.forEach(o => { try { o.stop(); } catch {} });
+    try { musicNodes.master.disconnect(); } catch {}
+    musicNodes = null;
+  }
+
+  // === Wire up buttons ===
+  document.getElementById('btnPlay').addEventListener('click', () => {
+    level = progress.unlockedLevel;
+    newGame('retry');
+    showScreen('game');
+    if (progress.settings.music) startMusic();
+  });
+  document.getElementById('btnLevels').addEventListener('click',   () => showScreen('levels'));
+  document.getElementById('btnSettings').addEventListener('click', () => showScreen('settings'));
+  document.getElementById('btnHowTo').addEventListener('click',    () => showScreen('howto'));
+  document.querySelectorAll('[data-back]').forEach(b => {
+    b.addEventListener('click', () => showScreen(b.dataset.back));
+  });
+
+  document.getElementById('btnPause').addEventListener('click', pauseGame);
+  document.getElementById('btnResume').addEventListener('click', resumePause);
+  document.getElementById('btnPauseRestart').addEventListener('click', () => {
+    pauseOverlayEl.classList.remove('show');
+    newGame('retry');
+  });
+  document.getElementById('btnPauseQuit').addEventListener('click', () => {
+    pauseOverlayEl.classList.remove('show');
+    stopMusic();
+    showScreen('home');
+  });
+
+  document.getElementById('toggleSound').addEventListener('click', () => {
+    progress.settings.sound = !progress.settings.sound;
+    saveProgress(); updateSettingsUI();
+    if (progress.settings.sound) beep(880, 0.08, 'triangle');
+  });
+  document.getElementById('toggleMusic').addEventListener('click', () => {
+    progress.settings.music = !progress.settings.music;
+    saveProgress(); updateSettingsUI();
+    if (progress.settings.music) startMusic(); else stopMusic();
+  });
+  document.getElementById('btnResetProgress').addEventListener('click', () => {
+    if (confirm('Reset all progress? You will lose all stars and level unlocks.')) {
+      progress = { unlockedLevel: 1, bestScores: {}, bestStars: {}, settings: progress.settings };
+      saveProgress();
+      updateSettingsUI();
+      showScreen('home');
+    }
+  });
+
+  document.getElementById('newGameBtn').addEventListener('click', () => newGame('retry'));
   document.getElementById('shuffleBtn').addEventListener('click', () => {
     if (busy) return;
     shuffleGrid();
@@ -1559,8 +1941,16 @@
     scheduleHint();
   });
   overlayBtn.addEventListener('click', () => newGame(lastWon ? 'next' : 'retry'));
+  document.getElementById('overlayQuitBtn').addEventListener('click', () => {
+    overlay.classList.remove('show');
+    stopMusic();
+    showScreen('home');
+  });
 
+  // Bootstrap: load progress, init game state silently, show home
+  loadProgress();
   newGame('restart');
+  showScreen('home');
 })();
 </script>
 
